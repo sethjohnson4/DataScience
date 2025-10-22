@@ -33,5 +33,23 @@ def AIandAutomationRisk(df):
     corr, pval = spearmanr(df['AI Impact Numeric'], df['Automation Risk (%)'])
     print(f"Spearman correlation = {corr:.3f}, p-value = {pval:.3e}")
 
+def IndustryAutomationRisk(df):
+    sns.boxplot(x='Industry', y='Automation Risk (%)', data=df)
+    plt.title('Automation Risk by Industry')
+    plt.xlabel('Industry')
+    plt.ylabel('Automation Risk (%)')
+    plt.show()
 
-AIandAutomationRisk(df_US)
+def JobImpact(df):
+    df.sort_values(by=('Automation Risk (%)'), ascending=False, inplace=True)
+    print("Top 20 jobs at the highest risk of being replaced by automation:\n")
+    print(df[['Job Title', 'Automation Risk (%)', 'AI Impact Level']].head(20))
+
+    print("\nTop 20 jobs with the lowest risk of being automated:\n")
+    print(df[['Job Title', 'Automation Risk (%)', 'AI Impact Level']].tail(20))
+
+
+
+#AIandAutomationRisk(df_US)
+#IndustryAutomationRisk(df_US)
+#JobImpact(df_US)
