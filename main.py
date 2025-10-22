@@ -48,8 +48,18 @@ def JobImpact(df):
     print("\nTop 20 jobs with the lowest risk of being automated:\n")
     print(df[['Job Title', 'Automation Risk (%)', 'AI Impact Level']].tail(20))
 
+def AIandJobGrowth(df):
+    print(pd.crosstab(df['AI Impact Level'], df['Job Status'], normalize='index'))
+    sns.countplot(x='AI Impact Level', hue='Job Status', data=df, palette='viridis')
 
+    plt.title('Job Status by AI Impact Level', fontsize=14)
+    plt.xlabel('AI Impact Level')
+    plt.ylabel('Number of Jobs')
+    plt.legend(title='Job Status', loc='upper right')
+    plt.tight_layout()
+    plt.show()
 
 #AIandAutomationRisk(df_US)
 #IndustryAutomationRisk(df_US)
 #JobImpact(df_US)
+AIandJobGrowth(df_US)
